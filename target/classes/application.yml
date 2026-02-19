@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: notification-bridge-service
+  # Use dev profile by default so local run uses mock Slack/Twilio (no credentials needed).
+  # Override with SPRING_PROFILES_ACTIVE=prod or -Dspring.profiles.active=prod for production.
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+# Security
+app:
+  security:
+    api-key: ${API_KEY:dev-api-key-change-me}
+  # JWT (optional)
+  jwt:
+    issuer: ${JWT_ISSUER:https://notification-bridge}
+    audience: ${JWT_AUDIENCE:notification-bridge}
+
+# Slack
+slack:
+  webhook-url: ${SLACK_WEBHOOK_URL:https://hooks.slack.com/services/placeholder}
+
+# Twilio
+twilio:
+  account-sid: ${TWILIO_ACCOUNT_SID:}
+  auth-token: ${TWILIO_AUTH_TOKEN:}
+  from-number: ${TWILIO_FROM_NUMBER:}
+
+# Retry
+retry:
+  max-attempts: 3
+  delay-ms: 1000
+  multiplier: 2
+
+logging:
+  level:
+    com.notificationbridge: INFO
+    org.springframework.security: INFO

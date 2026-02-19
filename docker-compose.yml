@@ -1,0 +1,13 @@
+services:
+  notification-bridge:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      API_KEY: ${API_KEY:-change-me-in-production}
+      SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
+      TWILIO_FROM_NUMBER: ${TWILIO_FROM_NUMBER}
+    restart: unless-stopped

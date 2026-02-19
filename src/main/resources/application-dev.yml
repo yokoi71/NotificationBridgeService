@@ -1,0 +1,19 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+# Use a different port in dev so 8080 can stay in use by another app
+server:
+  port: 8081
+
+logging:
+  level:
+    com.notificationbridge: DEBUG
+
+# Dev uses mock Slack/Twilio (no real credentials needed)
+slack:
+  webhook-url: https://hooks.slack.com/mock
+twilio:
+  account-sid: mock
+  auth-token: mock
